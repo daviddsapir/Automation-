@@ -97,19 +97,131 @@ public class LinearOldCode extends TestBase {
 	private void shoppingProcessEndToEnd() {
 
 		WebDriver driver = app.getDriver();
-		log.info("Click login button");
+
+		log.info("Click login button.");
 		driver.findElement(By.linkText("Log in")).click();
 
-		log.info("Type register email");
+		log.info("Type register email.");
 		driver.findElement(By.id("Email")).click();
 		driver.findElement(By.id("Email")).sendKeys(email);
 
-		log.info("Type register password");
+		log.info("Type register password.");
 		driver.findElement(By.id("Password")).click();
 		driver.findElement(By.id("Password")).sendKeys(password);
 
-		GenUtils.sleepMillis(3000);
+		log.info("Click Log Remember Me button.");
+		driver.findElement(By.xpath("//input[@id=\"RememberMe\"]")).click();
 
+		log.info("Click Log In button.");
+		driver.findElement(By.xpath("//div[@class=\"buttons\"]//button[@class=\"button-1 login-button\"]")).click();
+
+		log.info("Click Books button.");
+		driver.findElement(By.linkText("Books")).click();
+
+		// Select the second book.
+		log.info("Click Add to cart.\n");
+		String  productPriceFirstCheck = driver.findElement(By.xpath("//div[@data-productid=\"38\"]//span[@class=\"price actual-price\"]")).getText();
+		driver.findElement(By.xpath("//div[@data-productid=\"38\"]//button[@class=\"button-2 product-box-add-to-cart-button\"]")).click();
+
+		log.info("Verify that (1) appears in shopping card (sleep a bit till green panel).");
+		GenUtils.sleepMillis(secToMillis(6));
+		String amount = driver.findElement(By.xpath("//li[@id=\"topcartlink\"]//span[@class=\"cart-qty\"]")).getText();
+
+		log.info("Checking amount correctness:");
+		Assert.assertTrue(amount.equals("(1)"),
+				"Expected value: '" + "(1)" + "', but actual is '" + amount + "'");
+
+		log.info("Click Shopping card button");
+		driver.findElement(By.xpath("//li[@id=\"topcartlink\"]")).click();
+
+		log.info("Check that price is right (the one you we saved in step 3.");
+		String productPriceSecondCheck = driver.findElement(By.xpath("//div[@class=\"totals\"]//td[@class=\"cart-total-right\"]//strong")).getText();
+		Assert.assertTrue(productPriceFirstCheck.equals(productPriceSecondCheck),
+				"Expected value: '" + productPriceFirstCheck + "', but actual is '" + productPriceSecondCheck + "'");
+
+		log.info("Sign V in \"I agree with the terms of service\" checkbox.\n");
+		driver.findElement(By.xpath("//input[@id=\"termsofservice\"]")).click();
+
+		log.info("Click Check Out ” button.\n");
+		driver.findElement(By.xpath("//button[@id=\"checkout\"]")).click();
+
+		log.info("Fill in all Checkout form:");
+		log.info("Select Country.");
+		Select country = new Select(driver.findElement(By.xpath("//select[@id=\"BillingNewAddress_CountryId\"]")));
+		country.selectByVisibleText("Israel");
+
+		log.info("Type country.");
+		driver.findElement(By.xpath("//input[@id=\"BillingNewAddress_City\"]")).sendKeys("Jerusalem");;
+
+		log.info("Type address.");
+		driver.findElement(By.xpath("//input[@id=\"BillingNewAddress_Address1\"]")).sendKeys("Hadassah");
+
+		log.info("Type Zip / postal code.");
+		driver.findElement(By.id("BillingNewAddress_ZipPostalCode")).sendKeys("123");
+
+		log.info("Type Phone number.");
+		driver.findElement(By.id("BillingNewAddress_PhoneNumber")).sendKeys("123");
+
+		log.info("click Continue");
+		driver.findElement(By.xpath("//div[@id=\"checkout-step-billing\"]//button[@class=\"button-1 new-address-next-step-button\"]")).click();
+
+		GenUtils.sleepMillis(secToMillis(4));
+
+		log.info("click Continue");
+		driver.findElement(By.xpath("//div[@id=\"shipping-method-buttons-container\"]//button[@class=\"button-1 shipping-method-next-step-button\" ]")).click();
+
+		GenUtils.sleepMillis(secToMillis(4));
+
+		log.info("click Continue");
+		driver.findElement(By.xpath("//div[@id=\"payment-method-buttons-container\"]//button[@ class=\"button-1 payment-method-next-step-button\" ]")).click();
+
+		GenUtils.sleepMillis(secToMillis(4));
+
+		log.info("click Continue");
+		driver.findElement(By.xpath("//div[@id=\"payment-info-buttons-container\"]//button[@class=\"button-1 payment-info-next-step-button\"]")).click();
+
+		GenUtils.sleepMillis(secToMillis(4));
+
+		log.info("click Continue\n");
+		driver.findElement(By.xpath("//div[@id=\"confirm-order-buttons-container\"]//button[@class=\"button-1 confirm-order-next-step-button\"]")).click();
+
+
+		GenUtils.sleepMillis(secToMillis(4));
+
+		log.info("Check if Thank you appears.");
+		String thankYou = driver.findElement(By.xpath("//div[@class=\"page checkout-page order-completed-page\"]//h1")).getText();
+		Assert.assertTrue(thankYou.equals("Thank you"),
+				"Expected value: '" + "Thank you" + "', but actual is '" + thankYou + "'");
+
+		log.info("Check if Thank you appears.");
+		String orderSuccessfullyProcessed  = driver.findElement(By.xpath("//div[@class=\"section order-completed\"]//div[@class=\"title\"]//strong")).getText();
+		Assert.assertTrue(orderSuccessfullyProcessed.equals("Your order has been successfully processed!"),
+				"Expected value: '" + "Your order has been successfully processed!" + "', but actual is '" + orderSuccessfullyProcessed + "'");
+
+
+		log.info("Click Continue to complete order.");
+		driver.findElement(By.xpath("//button[@class=\"button-1 order-completed-continue-button\"]")).click();
+
+
+		log.info("Check if We \"Welcome to our store\" appears.");
+		String welcomeToOurStore = driver.findElement(By.xpath("//div[@class=\"topic-block-title\"]/h2")).getText();
+		Assert.assertTrue(welcomeToOurStore.equals("Welcome to our store"),
+				"Expected value: '" + "Welcome to our store" + "', but actual is '" + welcomeToOurStore + "'");
+
+
+		log.info("Verify (0) in the shopping cart.");
+		String verifyZero = driver.findElement(By.xpath("//li[@id=\"topcartlink\"]//span[@class=\"cart-qty\"]")).getText();
+		Assert.assertTrue(verifyZero.equals("(0)"),
+				"Expected value: '" + "(0)" + "', but actual is '" + verifyZero + "'");
+
+
+		GenUtils.sleepMillis(secToMillis(2));
+
+	}
+
+
+	private long secToMillis(long sec) {
+		return sec * 1000;
 	}
 
 }
