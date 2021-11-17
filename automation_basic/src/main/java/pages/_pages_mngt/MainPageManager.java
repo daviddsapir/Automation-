@@ -6,7 +6,15 @@ import org.openqa.selenium.support.PageFactory;
 
 import applogic.ApplicationManager1;
 import pages._pages_mngt.page_factory.DisplayedElementLocatorFactory;
+import pages.super_pages.MenusPage;
 import pages.super_pages.Page;
+import pages.util_pages.HomePage;
+import pages.util_pages.LoginPage;
+import pages.util_pages.RegisterPage;
+import pages.util_pages.RegisterSuccessPage;
+import pages.util_pages.ShoppingCartPage;
+import pages.util_pages.ItemsListPage;
+
 import util.ParamsUtils;
 import util.SelUtils;
 
@@ -17,13 +25,31 @@ public class MainPageManager {
 	private Logger log;
 	private ParamsUtils sessionParams;
 
+	//Pages
+	public MenusPage menusPage;
+	public RegisterPage registerPage;
+	public RegisterSuccessPage registerSuccessPage;
+	public HomePage homePage;
+	public LoginPage loginPage;
+	public ShoppingCartPage shoppingCartPage;
+	public ItemsListPage itemsListPage;
 
 	public MainPageManager(ApplicationManager1 app) {
 		driver = app.getDriver();
 		su = app.su;
 		log = app.getLogger();
-		sessionParams = app.getParamsUtils();		
-	
+		sessionParams = app.getParamsUtils();	
+		
+
+		//Pages initialization
+		menusPage = initElements(new MenusPage(this));
+		homePage=initElements(new HomePage(this));
+		registerPage = initElements(new RegisterPage(this));
+		registerSuccessPage=initElements(new RegisterSuccessPage(this));
+		loginPage = initElements(new LoginPage(this));
+		shoppingCartPage = initElements(new ShoppingCartPage(this));
+		itemsListPage = initElements(new ItemsListPage(this));
+		
 	}
 
 	public <T extends Page> T initElements(T page) {

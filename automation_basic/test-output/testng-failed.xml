@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.basic.LinearOldCode">
+      <class name="tests.basic.PageObjectCode">
         <methods>
           <include name="tearDown"/>
           <include name="test"/>
           <include name="init"/>
         </methods>
-      </class> <!-- tests.basic.LinearOldCode -->
+      </class> <!-- tests.basic.PageObjectCode -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

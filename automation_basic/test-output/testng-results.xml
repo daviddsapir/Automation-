@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-11-08T21:42:40Z" name="Default suite" finished-at="2021-11-08T21:42:53Z" duration-ms="12685">
+  <suite started-at="2021-11-17T05:13:24Z" name="Default suite" finished-at="2021-11-17T05:23:38Z" duration-ms="613813">
     <groups>
     </groups>
-    <test started-at="2021-11-08T21:42:40Z" name="Default test" finished-at="2021-11-08T21:42:53Z" duration-ms="12685">
-      <class name="tests.basic.LinearOldCode">
-        <test-method is-config="true" signature="init()[pri:0, instance:tests.basic.LinearOldCode@63070bab]" started-at="2021-11-08T21:42:40Z" name="init" finished-at="2021-11-08T21:42:41Z" duration-ms="1512" status="PASS">
+    <test started-at="2021-11-17T05:13:24Z" name="Default test" finished-at="2021-11-17T05:23:38Z" duration-ms="613813">
+      <class name="tests.basic.PageObjectCode">
+        <test-method is-config="true" signature="init()[pri:0, instance:tests.basic.PageObjectCode@63070bab]" started-at="2021-11-17T05:13:24Z" name="init" finished-at="2021-11-17T05:13:26Z" duration-ms="1541" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="test()[pri:0, instance:tests.basic.LinearOldCode@63070bab]" started-at="2021-11-08T21:42:41Z" name="test" finished-at="2021-11-08T21:42:52Z" duration-ms="10904" status="PASS">
+        <test-method signature="test()[pri:0, instance:tests.basic.PageObjectCode@63070bab]" started-at="2021-11-17T05:13:26Z" name="test" finished-at="2021-11-17T05:23:37Z" duration-ms="611752" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- test -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.basic.LinearOldCode@63070bab]" started-at="2021-11-08T21:42:52Z" name="tearDown" finished-at="2021-11-08T21:42:53Z" duration-ms="247" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.basic.PageObjectCode@63070bab]" started-at="2021-11-17T05:23:37Z" name="tearDown" finished-at="2021-11-17T05:23:38Z" duration-ms="504" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- tests.basic.LinearOldCode -->
+      </class> <!-- tests.basic.PageObjectCode -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

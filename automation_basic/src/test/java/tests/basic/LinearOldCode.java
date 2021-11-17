@@ -89,7 +89,7 @@ public class LinearOldCode extends TestBase {
 		String expectedTextFirstScreen = "Welcome to our store";
 		Assert.assertTrue(firstScreenText.equals(expectedTextFirstScreen),
 				"Expected value: '" + expectedTextFirstScreen +
-						"', but actual is '" + actualTextRegistration + "'");
+				"', but actual is '" + actualTextRegistration + "'");
 
 		log.info("Click logout button");
 		driver.findElement(By.xpath("//a[@class='ico-logout']")).click();
@@ -115,7 +115,7 @@ public class LinearOldCode extends TestBase {
 		driver.findElement(By.xpath("//input[@id=\"RememberMe\"]")).click();
 
 		log.info("Click Log In button.");
-		driver.findElement(By.xpath("//div[@class=\"buttons\"]//button[@class=\"button-1 login-button\"]")).click();
+		driver.findElement(By.cssSelector(".buttons button.register-button")).click();
 
 		log.info("Click Books button.");
 		driver.findElement(By.linkText("Books")).click();
@@ -128,7 +128,7 @@ public class LinearOldCode extends TestBase {
 				"[@class=\"button-2 product-box-add-to-cart-button\"]")).click();
 
 		log.info("Verify that (1) appears in shopping card (sleep a bit till green panel).");
-		GenUtils.sleepMillis(secToMillis(6));
+		GenUtils.sleepSeconds(6);
 		String amount = driver.findElement(By.xpath("//li[@id=\"topcartlink\"]//span[@class=\"cart-qty\"]")).getText();
 
 		log.info("Checking amount correctness:");
@@ -143,7 +143,7 @@ public class LinearOldCode extends TestBase {
 				"//td[@class=\"cart-total-right\"]//strong")).getText();
 		Assert.assertTrue(productPriceFirstCheck.equals(productPriceSecondCheck),
 				"Expected value: '" + productPriceFirstCheck +
-						"', but actual is '" + productPriceSecondCheck + "'");
+				"', but actual is '" + productPriceSecondCheck + "'");
 
 		log.info("Sign V in \"I agree with the terms of service\" checkbox.");
 		driver.findElement(By.xpath("//input[@id=\"termsofservice\"]")).click();
@@ -174,35 +174,35 @@ public class LinearOldCode extends TestBase {
 				"//button[@class=\"button-1 new-address-next-step-button\"]")).click();
 
 
-		GenUtils.sleepMillis(secToMillis(2));
+		GenUtils.sleepSeconds(2);
 		log.info("Fill Shipping .");
 		log.info("click Continue.");
 		driver.findElement(By.xpath("//div[@id=\"shipping-method-buttons-container\"]" +
 				"//button[@class=\"button-1 shipping-method-next-step-button\" ]")).click();
 
 
-		GenUtils.sleepMillis(secToMillis(2));
+		GenUtils.sleepSeconds(2);
 		log.info("Fill Payment method.");
 		log.info("click Continue.");
 		driver.findElement(By.xpath("//div[@id=\"payment-method-buttons-container\"]" +
 				"//button[@ class=\"button-1 payment-method-next-step-button\" ]")).click();
 
 
-		GenUtils.sleepMillis(secToMillis(2));
+		GenUtils.sleepSeconds(2);
 		log.info("Fill Payment information.");
 		log.info("click Continue");
 		driver.findElement(By.xpath("//div[@id=\"payment-info-buttons-container\"]" +
 				"//button[@class=\"button-1 payment-info-next-step-button\"]")).click();
 
 
-		GenUtils.sleepMillis(secToMillis(2));
+		GenUtils.sleepSeconds(2);
 		log.info("Fill Confirm order.");
 		log.info("Click confirm\n");
 		driver.findElement(By.xpath("//div[@id=\"confirm-order-buttons-container\"]" +
 				"//button[@class=\"button-1 confirm-order-next-step-button\"]")).click();
 
 
-		GenUtils.sleepMillis(secToMillis(2));
+		GenUtils.sleepSeconds(2);
 		log.info("Check if Thank you appears.");
 		String thankYou = driver.findElement(By.xpath("//div[@class=\"page" +
 				" checkout-page order-completed-page\"]//h1")).getText();
@@ -236,13 +236,7 @@ public class LinearOldCode extends TestBase {
 
 		log.info(""); // to add some spacing before the final log.
 
-		GenUtils.sleepMillis(secToMillis(2));
+		GenUtils.sleepSeconds(2);
 
 	}
-
-
-	private long secToMillis(long sec) {
-		return sec * 1000;
-	}
-
 }
