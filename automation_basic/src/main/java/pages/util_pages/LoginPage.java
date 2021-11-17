@@ -39,7 +39,7 @@ public class LoginPage extends MenusPage {
 		return pages.loginPage.ensurePageLoaded();
 	}
 
-	public HomePage registerClickLogin() {
+	public HomePage clickLoginButton() {
 		log.info("Click Log In button.");
 		driver.findElement(By.xpath("/html/body/div[6]/div[3]/div/div/"
 				+ "div/div[2]/div[1]/div[2]/form/div[3]/button")).click();

@@ -139,8 +139,7 @@ public class LinearOldCode extends TestBase {
 		driver.findElement(By.xpath("//li[@id=\"topcartlink\"]")).click();
 
 		log.info("Check that price is right (the one you we saved in step 3.");
-		String productPriceSecondCheck = driver.findElement(By.xpath("//div[@class=\"totals\"]" +
-				"//td[@class=\"cart-total-right\"]//strong")).getText();
+		String productPriceSecondCheck = driver.findElement(By.xpath("//div[@class=\"totals\"]//td[@class=\"cart-total-right\"]//strong")).getText();
 		Assert.assertTrue(productPriceFirstCheck.equals(productPriceSecondCheck),
 				"Expected value: '" + productPriceFirstCheck +
 				"', but actual is '" + productPriceSecondCheck + "'");
@@ -151,14 +150,13 @@ public class LinearOldCode extends TestBase {
 		log.info("Click Check Out ” button.\n");
 		driver.findElement(By.xpath("//button[@id=\"checkout\"]")).click();
 
-		log.info("Fill in all Checkout form:");
-		log.info("Fill Billing address.");
+		
 		log.info("Select Country.");
 		Select country = new Select(driver.findElement(By.xpath("//select[@id=\"BillingNewAddress_CountryId\"]")));
 		country.selectByVisibleText("Israel");
 
 		log.info("Type city.");
-		driver.findElement(By.id("BillingNewAddress_City")).sendKeys("Jerusalem");;
+		driver.findElement(By.id("BillingNewAddress_City")).sendKeys("Jerusalem");
 
 		log.info("Type address.");
 		driver.findElement(By.id("BillingNewAddress_Address1")).sendKeys("Hadassah");

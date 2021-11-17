@@ -43,7 +43,7 @@ public class MenusPage extends AnyPage {
 	}
 
 	
-	public LoginPage clickLogin() {
+	public LoginPage clickLoginLink() {
 		log.info("Click login button");
 		driver.findElement(By.linkText("Log in")).click();
 		return pages.loginPage.ensurePageLoaded();

@@ -1,5 +1,6 @@
 package tests.basic;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import tests.supers.TestBase;
@@ -51,21 +52,80 @@ public class PageObjectCode extends TestBase {
 		
 		// Select product.
 		addBookToShoppingCart();
+		
+		// Check out.
+		checkOut();
+
+		// order success page
+		OrderSuccessPage();
+
+		checkHomePageAndShoppingCart();
 
 	}
 	
 	private void login() {
 		// login
-		app.pages().menusPage.clickLogin()
+		app.pages()
+				.menusPage
+				.clickLoginLink()
 				.setEmail(email)
 				.setPassword(password)
 				.checkRememberMe()
-				.registerClickLogin();
+				.clickLoginButton();
 	}
 	
 	private void addBookToShoppingCart() {
-		app.pages().menusPage
+
+		// get the price of the second product.
+		String price = app.pages().menusPage
 				.clickBooks()
-				.selectSecondProduct();
+				.getPrice();
+
+		// add to cart the second product.
+		String productAmount = app.pages()
+								.itemsListPage
+								.selectSecondProduct()
+								.getProductAmount();
+
+		// verify data.
+		app.pages()
+				.itemsListPage
+				.verifyOnceProductInShoppingCart(productAmount)
+				.ClickShoppingCardButton()
+				.verifyProductPriceInShoppingCart(price)
+				.checkAgreeWithTheTermsOfServiceCheckbox()
+				.clickCheckOutButton();
+		
+	}
+	
+	private void checkOut() {
+		
+		app.pages()
+				.checkOutPage
+				.selectCountry()
+				.fillCityFeild()
+				.fillAddressFeild()
+				.fillZipPostalCodeFeild()
+				.fillPhoneNumberFeild()
+				.clickContinueBillingAddress()
+				.clickContinueShippingMethod()
+				.clickContinuePaymentMethod()
+				.clickContinuePaymentInformation()
+				.clickConfirm();
+
+	}
+
+	private void OrderSuccessPage() {
+		app.pages().
+				orderSuccessPage
+				.checkIfThankYouAppears()
+				.clickContinueToCompleteOrder();
+	}
+
+	public void checkHomePageAndShoppingCart() {
+		app.pages().
+				homePage
+				.checkIfWelcomeToOurStoreAppears()
+				.checkIfShoppingCartIsEmpty();
 	}
 }

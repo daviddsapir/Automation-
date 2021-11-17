@@ -31,4 +31,24 @@ public class HomePage extends MenusPage {
 		return this;
 	}
 
+	public HomePage checkIfWelcomeToOurStoreAppears() {
+
+		log.info("Check if We \"Welcome to our store\" appears.");
+		String welcomeToOurStore = driver.findElement(By.xpath("//div[@class=\"topic-block-title\"]/h2")).getText();
+		Assert.assertTrue(welcomeToOurStore.equals("Welcome to our store"),
+				"Expected value: '" + "Welcome to our store" + "', but actual is '" + welcomeToOurStore + "'");
+
+		return ensurePageLoaded();
+	}
+
+	public HomePage checkIfShoppingCartIsEmpty() {
+
+		log.info("Verify (0) in the shopping cart.");
+		String verifyZero = driver.findElement(By.xpath("//li[@id=\"topcartlink\"]" +
+				"//span[@class=\"cart-qty\"]")).getText();
+		Assert.assertTrue(verifyZero.equals("(0)"),
+				"Expected value: '" + "(0)" + "', but actual is '" + verifyZero + "'");
+
+		return ensurePageLoaded();
+	}
 }

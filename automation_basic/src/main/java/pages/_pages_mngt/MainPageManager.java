@@ -8,12 +8,14 @@ import applogic.ApplicationManager1;
 import pages._pages_mngt.page_factory.DisplayedElementLocatorFactory;
 import pages.super_pages.MenusPage;
 import pages.super_pages.Page;
+import pages.util_pages.CheckOutPage;
 import pages.util_pages.HomePage;
 import pages.util_pages.LoginPage;
 import pages.util_pages.RegisterPage;
 import pages.util_pages.RegisterSuccessPage;
 import pages.util_pages.ShoppingCartPage;
 import pages.util_pages.ItemsListPage;
+import pages.util_pages.OrderSuccessPage;
 
 import util.ParamsUtils;
 import util.SelUtils;
@@ -33,6 +35,8 @@ public class MainPageManager {
 	public LoginPage loginPage;
 	public ShoppingCartPage shoppingCartPage;
 	public ItemsListPage itemsListPage;
+	public CheckOutPage checkOutPage;
+	public OrderSuccessPage orderSuccessPage;
 
 	public MainPageManager(ApplicationManager1 app) {
 		driver = app.getDriver();
@@ -49,7 +53,8 @@ public class MainPageManager {
 		loginPage = initElements(new LoginPage(this));
 		shoppingCartPage = initElements(new ShoppingCartPage(this));
 		itemsListPage = initElements(new ItemsListPage(this));
-		
+		checkOutPage = initElements(new CheckOutPage(this));
+		orderSuccessPage = initElements(new OrderSuccessPage(this));
 	}
 
 	public <T extends Page> T initElements(T page) {
