@@ -1,6 +1,5 @@
 package tests.basic;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import tests.supers.TestBase;
@@ -46,28 +45,17 @@ public class PageObjectCode extends TestBase {
 	}
 
 	private void shoppingProcessEndToEnd() {
-	
-		// Login.
+
 		login();
-		
-		// Select product.
+
 		addBookToShoppingCart();
-		
-		// Check out.
-		checkOut();
-
-		// order success page
-		OrderSuccessPage();
-
-		checkHomePageAndShoppingCart();
 
 		GenUtils.sleepSeconds(2);	// just to take a glance at homepage.
 
 	}
-	
+
 	private void login() {
 
-		// login
 		app.pages()
 				.menusPage
 				.clickLoginLink()
@@ -76,35 +64,29 @@ public class PageObjectCode extends TestBase {
 				.checkRememberMe()
 				.clickLoginButton();
 	}
-	
+
 	private void addBookToShoppingCart() {
 
-		// get the price of the second product.
-		String price = app.pages().menusPage
-				.clickBooks()
-				.getPrice();
+		// get price.
+		String price = app.pages()
+								.menusPage
+								.clickBooks()
+								.getPrice();
 
-		// add to cart the second product.
-		String productAmount = app.pages()
-								.itemsListPage
-								.selectSecondProduct()
-								.getProductAmount();
 
-		// verify data.
+		// Add to cart.
+		String productQty = app.pages()
+									.itemsListPage
+									.selectSecondProduct()
+									.getProductAmount();
+
 		app.pages()
 				.itemsListPage
-				.verifyOnceProductInShoppingCart(productAmount)
-				.ClickShoppingCardButton()
+				.verifyCart(productQty)
+				.clickShoppingCardButton()
 				.verifyProductPriceInShoppingCart(price)
 				.checkAgreeWithTheTermsOfServiceCheckbox()
-				.clickCheckOutButton();
-		
-	}
-	
-	private void checkOut() {
-		
-		app.pages()
-				.checkOutPage
+				.clickCheckOutButton()
 				.selectCountry()
 				.fillCityFeild()
 				.fillAddressFeild()
@@ -114,23 +96,10 @@ public class PageObjectCode extends TestBase {
 				.clickContinueShippingMethod()
 				.clickContinuePaymentMethod()
 				.clickContinuePaymentInformation()
-				.clickConfirm();
-
-	}
-
-	private void OrderSuccessPage() {
-
-		app.pages().
-				orderSuccessPage
+				.clickConfirm()
 				.checkIfThankYouAppears()
-				.clickContinueToCompleteOrder();
-	}
-
-	public void checkHomePageAndShoppingCart() {
-
-		app.pages().
-				homePage
-				.checkIfWelcomeToOurStoreAppears()
-				.checkIfShoppingCartIsEmpty();
+				.clickContinueToCompleteOrder()
+				.verifyHomeText()
+				.checkAmountInCart(0);
 	}
 }

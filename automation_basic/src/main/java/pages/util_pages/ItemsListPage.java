@@ -1,5 +1,6 @@
 package pages.util_pages;
 
+import net.schmizz.sshj.common.Message;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,9 +34,9 @@ public class ItemsListPage extends MenusPage {
 		log.info("Click Add to cart.");
 		driver.findElement(By.xpath("//div[@data-productid=\"38\"]//button" +
 				"[@class=\"button-2 product-box-add-to-cart-button\"]")).click();
-		
+
 		GenUtils.sleepSeconds(2);
-		
+
 		return ensurePageLoaded();
 	}
 
@@ -45,30 +46,20 @@ public class ItemsListPage extends MenusPage {
 				"//span[@class=\"price actual-price\"]")).getText();
 	}
 
-	/**
-	 *
-	 * @return {String}
-	 */
 	public String getProductAmount() {
-		
+
 		return driver.findElement(By.xpath("//li[@id=\"topcartlink\"]//span[@class=\"cart-qty\"]")).getText();
 	}
 
+	public ItemsListPage verifyCart(String expectedQty) {
 
-	public ItemsListPage verifyOnceProductInShoppingCart(String amount) {
-
-		log.info("Checking amount correctness:");
-
-		// wait for top cart button appear.
 		GenUtils.sleepSeconds(6);
+		checkAmountInCart(Integer.parseInt(expectedQty.substring(1, 2)));
 
-		Assert.assertTrue(amount.equals("(1)"),
-				"Expected value: '" + "(1)" + "', but actual is '" + amount + "'");
-		
 		return ensurePageLoaded();
 	}
 
-	public ShoppingCartPage ClickShoppingCardButton() {
+	public ShoppingCartPage clickShoppingCardButton() {
 		log.info("Click Shopping card button");
 		driver.findElement(By.xpath("//li[@id=\"topcartlink\"]")).click();
 
