@@ -61,9 +61,12 @@ public class PageObjectCode extends TestBase {
 
 		checkHomePageAndShoppingCart();
 
+		GenUtils.sleepSeconds(2);	// just to take a glance at homepage.
+
 	}
 	
 	private void login() {
+
 		// login
 		app.pages()
 				.menusPage
@@ -116,6 +119,7 @@ public class PageObjectCode extends TestBase {
 	}
 
 	private void OrderSuccessPage() {
+
 		app.pages().
 				orderSuccessPage
 				.checkIfThankYouAppears()
@@ -123,6 +127,7 @@ public class PageObjectCode extends TestBase {
 	}
 
 	public void checkHomePageAndShoppingCart() {
+
 		app.pages().
 				homePage
 				.checkIfWelcomeToOurStoreAppears()

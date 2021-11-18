@@ -34,6 +34,8 @@ public class ShoppingCartPage extends MenusPage {
 		log.info("Validate price");
 		String productPriceSecondCheck = driver.findElement(By.xpath("//*[@id=\"shopping-cart-form\"]"
 				+ "/div[3]/div[2]/div[1]/table/tbody/tr[4]/td[2]/span/strong")).getText();
+
+		// check price correctness
 		Assert.assertTrue(price.equals(productPriceSecondCheck),
 				"Expected value: '" + price +
 				"', but actual is '" + productPriceSecondCheck + "'");

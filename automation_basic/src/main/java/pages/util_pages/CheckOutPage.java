@@ -79,8 +79,11 @@ public class CheckOutPage extends MenusPage {
 	}
 	
 	public CheckOutPage clickContinueShippingMethod() {
-		
-		GenUtils.sleepSeconds(2);
+
+		waitBig.until(ExpectedConditions.
+				visibilityOf(driver.findElement(By.xpath("//div[@id=\"shipping-method-buttons-container\"]" +
+				"//button[@class=\"button-1 shipping-method-next-step-button\" ]"))));
+
 		log.info("Fill Shipping method.");
 		log.info("click Continue.");
 		driver.findElement(By.xpath("//div[@id=\"shipping-method-buttons-container\"]" +
@@ -91,8 +94,11 @@ public class CheckOutPage extends MenusPage {
 	
 	
 	public CheckOutPage clickContinuePaymentMethod() {
-		
-		GenUtils.sleepSeconds(2);
+
+		waitBig.until(ExpectedConditions.
+				visibilityOf(driver.findElement(By.xpath("//div[@id=\"payment-method-buttons-container\"]" +
+								"//button[@ class=\"button-1 payment-method-next-step-button\" ]"))));
+
 		log.info("click Continue.");
 		driver.findElement(By.xpath("//div[@id=\"payment-method-buttons-container\"]" +
 				"//button[@ class=\"button-1 payment-method-next-step-button\" ]")).click();
@@ -101,8 +107,11 @@ public class CheckOutPage extends MenusPage {
 	}
 	
 	public CheckOutPage clickContinuePaymentInformation() {
-		
-		GenUtils.sleepSeconds(2);
+
+		waitBig.until(ExpectedConditions.
+				visibilityOf(driver.findElement(By.xpath("//div[@id=\"payment-info-buttons-container\"]" +
+						"//button[@class=\"button-1 payment-info-next-step-button\"]"))));
+
 		log.info("click Continue");
 		driver.findElement(By.xpath("//div[@id=\"payment-info-buttons-container\"]" +
 				"//button[@class=\"button-1 payment-info-next-step-button\"]")).click();
@@ -112,7 +121,9 @@ public class CheckOutPage extends MenusPage {
 
 	public OrderSuccessPage clickConfirm() {
 
-		GenUtils.sleepSeconds(2);
+		waitBig.until(ExpectedConditions.
+				visibilityOf(driver.findElement(By.xpath("//*[@id=\"confirm-order-buttons-container\"]/button"))));
+
 		log.info("Click confirm\n");
 		driver.findElement(By.xpath("//*[@id=\"confirm-order-buttons-container\"]/button")).click();
 

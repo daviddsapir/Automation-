@@ -15,11 +15,14 @@ public class OrderSuccessPage extends MenusPage {
         super(pages);
     }
 
+
+    @FindBy(xpath = "/html/body/div[6]/div[3]/div/div/div/div[1]/h1")
+    private WebElement orderSuccessTitle;
+
     public OrderSuccessPage ensurePageLoaded() {
 
         super.ensurePageLoaded();
-        waitBig.until(ExpectedConditions.visibilityOf(driver.
-                findElement(By.xpath("/html/body/div[6]/div[3]/div/div/div/div[1]/h1"))));
+        waitBig.until(ExpectedConditions.visibilityOf(orderSuccessTitle));
 
         return this;
     }
@@ -30,6 +33,7 @@ public class OrderSuccessPage extends MenusPage {
         log.info("Check if Thank you appears.");
         String orderSuccessfullyProcessed  = driver.findElement(By.xpath("//div[@class=\"section order-completed\"]" +
                 "//div[@class=\"title\"]//strong")).getText();
+
         Assert.assertTrue(orderSuccessfullyProcessed.equals("Your order has been successfully processed!"),
                 "Expected value: '" + "Your order has been successfully processed!" + "'," +
                         " but actual is '" + orderSuccessfullyProcessed + "'");
